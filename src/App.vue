@@ -16,7 +16,7 @@ export default {
 <style>
 @import url('https://fonts.googleapis.com/css2?family=Lato:wght@400;700&display=swap');
 body{
-  background: #2c3e50;
+  background: #0A192F;
 }
 #app {
   font-family: 'Lato', sans-serif;
