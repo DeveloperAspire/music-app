@@ -50,7 +50,7 @@ body{
 }
 .music-container{
     height:100%;
-    margin: 80px 0;
+    margin: 50px 0;
     width:100%;
     max-width:400px;
 }
