@@ -6,21 +6,21 @@
 
 <div class="music-container">
     <div>
-        <img src="../assets/img/stay-high.jpeg" alt="" class="cover">
+        <img :src="cover" alt="" class="cover">
     </div>
     <div class="showcase">
-        <p class="music-title">Stay High</p>
-        <p class="music-singer">Juice WRLD</p>
+        <p class="music-title">{{title}}</p>
+        <p class="music-singer">{{artist}}</p>
     </div>
     <div class="progress-container">
         <div class="progress">
         </div>
     </div>
-    <audio src="../assets/Stay_High.mp3"></audio>
+    <audio :src="song" id="audio" type="audio/mp3"></audio>
     <div class="controls">
-        <button class="action-btn"><fas icon="backward"/></button>
-        <button class="action-btn action"><fas icon="play"/></button>
-        <button class="action-btn"><fas icon="forward"/></button>
+        <button @click="prevSong" class="action-btn"><i class="fas fa-backward"></i></button>
+        <button id="play" @click="playToggle" class="action-btn action"><i class="fas fa-play"></i></button>
+        <button @click="nextSong" class="action-btn"><i class="fas fa-forward"></i></button>
     </div>
 
 </div>
@@ -28,6 +28,137 @@
 
 <script>
 export default {
+    data(){
+        return{
+            Music:[
+                {
+                title:"AG-BABY",
+                song:require("../assets/music/AG-BABY.mp3"),
+                artist:"Adekunle Gold ft BlackMan",
+                cover:require("../assets/img/AG-BABY.jpg")
+                },
+                 {
+                title:"Dami Duro",
+                song:require("../assets/music/Dami-Duro.mp3"),
+                artist:"Davido",
+                cover:require("../assets/img/dami-duro.jpg")
+                },
+                 {
+                title:"Holy",
+                song:require("../assets/music/Holy.mp3"),
+                artist:"Justin Beiber ft Chance",
+                cover:require("../assets/img/holy.jpg")
+                },
+                 {
+                title:"I'm the One",
+                song:require("../assets/music/I'm-the-one.mp3"),
+                artist:"DJ Khaled",
+                cover:require("../assets/img/am-the-one.jpg")
+                },
+                 {
+                title:"Jowo",
+                song:require("../assets/music/Jowo.mp3"),
+                artist:"Davido",
+                cover:require("../assets/img/jowo.jpg")
+                },
+                 {
+                title:"Own It",
+                song:require("../assets/music/Own-It.mp3"),
+                artist:"Stormzy",
+                cover:require("../assets/img/own-it.jpg")
+                },
+                 {
+                title:"Shele gan gan",
+                song:require("../assets/music/Shele-gan-gan.mp3"),
+                artist:"Lil Kesh",
+                cover:require("../assets/img/shele.jpg")
+                },
+                 {
+                title:"Someone You Loved",
+                song:require("../assets/music/Someone_You_Loved.mp3"),
+                artist:"Lewis",
+                cover:require("../assets/img/someone.jpg")
+                },
+                 {
+                title:"Stay High",
+                song:require("../assets/music/Stay_High.mp3"),
+                artist:"Juice WRLD",
+                cover:require("../assets/img/stay-high.jpeg")
+                },
+                ],
+
+                play:false,
+                title: '',
+                song:'',
+                artist:'',
+                cover:'',
+                index:0,
+        }
+    },
+    methods:{
+        start(){
+          const musicList = this.Music;
+           let currentSong = this.index;
+
+           this.loadSong(musicList[currentSong])
+        },
+       playToggle(){
+          this.play=!this.play
+          const container = document.querySelector('.music-container')
+           if(this.play == true){
+               container.classList.add('play')
+               this.playSong()
+           }else{
+              container.classList.remove('play')
+               this.pauseSong()
+           }
+       },
+       playSong(){
+            const audio = document.getElementById('audio');
+            audio.play()
+            audio.autoplay=true;
+            const play= document.querySelector('#play')
+            play.querySelector('i.fas').classList.remove('fa-play')
+            play.querySelector('i.fas').classList.add('fa-pause')
+       },
+       pauseSong(){
+            const audio = document.getElementById('audio');
+            audio.pause()
+            const play= document.querySelector('#play')
+            play.querySelector('i.fas').classList.add('fa-play')
+            play.querySelector('i.fas').classList.remove('fa-pause')
+
+       },
+       loadSong(song){
+           this.title=song.title;
+           this.song=song.song;
+           this.artist=song.artist;
+           this.cover=song.cover;
+       },
+       nextSong(){
+           this.index++
+           const music = this.Music
+
+           if(this.index === music.length){
+              this.index = 0
+           }
+           this.start()
+           this.playSong()
+
+       },
+       prevSong(){
+        this.index--
+        const music = this.Music
+          if(this.index < 0){
+              this.index = music.length-1
+           }
+        this.start()
+       }
+    
+    },
+    mounted(){
+           this.start()
+    }
     
 
 }
@@ -51,7 +182,7 @@ body{
 .music-container{
     height:100%;
     margin: 50px 0;
-    width:100%;
+    width:300px;
     max-width:400px;
 }
 .showcase{
@@ -68,14 +199,22 @@ body{
     animation-play-state: paused;
    
 }
+.music-container.play .showcase p{
+    animation-play-state: running;
+}
 .showcase :nth-child(2){
     font-weight: bold;
 }
 .cover{
     border-radius: 50%;
+    width: 200px;
+    height:200px;
     justify-self: center;
     animation: spin 1s linear infinite;
     animation-play-state: paused;
+}
+.music-container.play .cover{
+    animation-play-state: running;
 }
 .progress-container{
     width:100%;
@@ -85,7 +224,7 @@ body{
     border-radius: 5px;
 }
 .progress{
-    background-color:#78E87A;
+    background-color:#6DF3DA;
     height:100%;
     width:10%;
     border-radius: 5px;
@@ -96,14 +235,17 @@ body{
     padding:10px;
     border-radius: 5px;
     width:100%;
-    box-shadow:0px 5px 20px #78E87A;
-    animation: breathe 1s linear infinite;
+    box-shadow:0px 5px 20px #6DF3DA;
+    animation: breathe 2s linear infinite;
     animation-play-state: paused;
+}
+.music-container.play .controls{
+    animation-play-state: running;
 }
 .action-btn{
     border:0;
     background: none;
-    color:#78E87A;
+    color:#6DF3DA;
     font-size:20px;
     margin:0 15px;
 }
@@ -111,7 +253,7 @@ body{
    outline:none;
 }
 .action{
-    background: #78E87A;
+    background: #6DF3DA;
     color:white;
     font-size:22px;
     padding:10px;
@@ -121,16 +263,16 @@ body{
 /* ANIMATIONS */
 @keyframes breathe{
     10%{
-        box-shadow:0px 5px 10px #78E87A;
+        box-shadow:0px 5px 10px #6DF3DA;
     }
     30%{
-          box-shadow:0px 5px 20px #78E87A;
+          box-shadow:0px 5px 20px red;
     }
     50%{
-         box-shadow:0px 5px 30px #78E87A;
+         box-shadow:0px 5px 30px yellow;
     }
     100%{
-         box-shadow:0px 5px 40px #78E87A;
+         box-shadow:0px 5px 40px #6DF3DA;
     }
 }
 @keyframes slide {
