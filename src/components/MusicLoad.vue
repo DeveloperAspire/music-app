@@ -153,7 +153,7 @@ export default {
            this.artist=song.artist;
            this.cover=song.cover;
        },
-       playList(e,num){
+       playList(num){
            this.index=num;
            this.start()
            this.playSong()
