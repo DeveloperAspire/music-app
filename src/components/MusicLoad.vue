@@ -432,6 +432,9 @@ body{
    height: 100vh;
    padding-top:50px;
 }
+.title{
+     margin-top:80px;
+}
     .title h1{
         font-size:35px;
     }
