@@ -16,7 +16,7 @@
         <div class="progress">
         </div>
     </div>
-    <audio :src="song" id="audio" type="audio/mp3"></audio>
+    <audio @timeupdate="updateProgress" :src="song" id="audio" type="audio/mp3"></audio>
     <div class="controls">
         <button @click="prevSong" class="action-btn"><i class="fas fa-backward"></i></button>
         <button id="play" @click="playToggle" class="action-btn action"><i class="fas fa-play"></i></button>
@@ -153,6 +153,13 @@ export default {
               this.index = music.length-1
            }
         this.start()
+       },
+       updateProgress(e){
+           const progress = document.querySelector('.progress')
+           const{duration, currentTime}= e.srcElement
+           const progressPercent = (currentTime/duration) * 100
+
+          progress.style.width = `${progressPercent}%`
        }
     
     },
@@ -234,7 +241,8 @@ body{
 .progress{
     background-color:#6DF3DA;
     height:100%;
-    width:10%;
+    width:0%;
+    transition: width 0.1s linear;
     border-radius: 5px;
 }
 
