@@ -346,7 +346,6 @@ body{
    border-radius: 5px;
    transition:display 0.5s linear;
    display: none;
-   /* opacity: 0; */
 }
 .nav ul{
     list-style-type: none;
@@ -430,11 +429,18 @@ body{
 @media (max-width:500px) {
     .nav{
    background: rgba(0,0,0,0.5);
+   height: 100vh;
+   padding-top:50px;
 }
     .title h1{
         font-size:35px;
     }
-    
+    .menu{
+   position:absolute;
+   left:0;
+   top:4%;
+   z-index: 3;
+}
 }
 
 </style>
