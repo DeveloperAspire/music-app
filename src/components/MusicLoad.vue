@@ -159,7 +159,7 @@ export default {
            this.playSong()
             const nav = document.querySelector('.nav')
             setTimeout(()=> {
-                nav.style.opacity=0;
+                nav.style.display="none";
 
             },1000)
 
@@ -202,10 +202,10 @@ export default {
            const nav = document.querySelector('.nav')
            this.show=!this.show;
            if(this.show){
-             nav.style.opacity=0;
+             nav.style.display="none";
            }
            else{
-               nav.style.opacity=1
+               nav.style.display="block"
            }
        }
     
@@ -344,8 +344,9 @@ body{
    height: 80vh;
    z-index: 2;
    border-radius: 5px;
-   transition:opacity 0.5s linear;
-   opacity: 0;
+   transition:display 0.5s linear;
+   display: none;
+   /* opacity: 0; */
 }
 .nav ul{
     list-style-type: none;
