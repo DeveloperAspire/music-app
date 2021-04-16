@@ -336,7 +336,7 @@ body{
 .menu{
    position:absolute;
    left:0;
-   top:20;
+   top:2%;
    z-index: 3;
 }
 .nav{
