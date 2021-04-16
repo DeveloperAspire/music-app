@@ -12,11 +12,11 @@
         <p class="music-title">{{title}}</p>
         <p class="music-singer">{{artist}}</p>
     </div>
-    <div class="progress-container">
+    <div @click="setProgress" class="progress-container">
         <div class="progress">
         </div>
     </div>
-    <audio @timeupdate="updateProgress" :src="song" id="audio" type="audio/mp3"></audio>
+    <audio @timeupdate="updateProgress" @ended="nextSong" :src="song" id="audio" type="audio/mp3"></audio>
     <div class="controls">
         <button @click="prevSong" class="action-btn"><i class="fas fa-backward"></i></button>
         <button id="play" @click="playToggle" class="action-btn action"><i class="fas fa-play"></i></button>
@@ -160,6 +160,15 @@ export default {
            const progressPercent = (currentTime/duration) * 100
 
           progress.style.width = `${progressPercent}%`
+       },
+       setProgress(e){
+            const audio = document.getElementById('audio');
+           const width = 216
+           console.log(width)
+          const clickX = e.offsetX;
+           const duration= audio.duration;
+
+          audio.currentTime = (clickX/width)*duration
        }
     
     },
