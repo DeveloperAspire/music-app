@@ -317,7 +317,7 @@ body{
     background: white;
 }
 .menu{
-   position:fixed;
+   position:absolute;
    left:0;
    top:20;
    z-index: 3;
