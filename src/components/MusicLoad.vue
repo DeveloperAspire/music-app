@@ -163,8 +163,7 @@ export default {
        },
        setProgress(e){
             const audio = document.getElementById('audio');
-           const width = 216
-           console.log(width)
+           const width = 300
           const clickX = e.offsetX;
            const duration= audio.duration;
 
