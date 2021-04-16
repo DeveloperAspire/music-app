@@ -273,7 +273,7 @@ body{
     width: 200px;
     height:200px;
     justify-self: center;
-    animation: spin 1s linear infinite;
+    animation: spin 3s linear infinite;
     animation-play-state: paused;
 }
 .music-container.play .cover{
