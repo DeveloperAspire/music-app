@@ -1,6 +1,6 @@
 <template>
 <div class="title">
-    <h1>Spot on</h1>
+    <h1><span>Vue</span>Music</h1>
      <p>Music for the soul...</p>
 </div>
 
@@ -179,6 +179,14 @@ body{
 .title{
     color:white;
 }
+.title h1{
+        font-size:40px;
+        font-weight: bold;
+    }
+.title h1 span{
+    color:#58B883;
+    margin-right: 10px;
+}
 .music-container{
     height:100%;
     margin: 50px 0;
@@ -249,6 +257,9 @@ body{
     font-size:20px;
     margin:0 15px;
 }
+.action-btn:hover{
+   color:#58B883;
+}
 .action-btn:focus{
    outline:none;
 }
@@ -258,6 +269,9 @@ body{
     font-size:22px;
     padding:10px;
     border-radius: 50px;
+}
+.action:hover{
+    background: white;
 }
 
 /* ANIMATIONS */
@@ -313,6 +327,14 @@ body{
     }
     100%{
         transform: rotate(360deg);
+    }
+    
+}
+
+/* MEDIA QUERIES */
+@media (max-width:500px) {
+    .title h1{
+        font-size:35px;
     }
     
 }
