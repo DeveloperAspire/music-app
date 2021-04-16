@@ -1,6 +1,21 @@
 <template>
+<button @click="showSong" class="action-btn menu"><i class="fas fa-music fa-lg"></i><i class="fas fa-bars fa-lg"></i></button>
+
+<div class="nav">
+    <ul>
+        <li>AG_BABY- Adekunle Gold ft BlackMan</li>
+        <li>Dami_Duro- Davido</li>
+        <li>Holy- Justin Bieber ft Chance</li>
+        <li>I'm_The_One- DJ Khaled</li>
+        <li>Jowo- Davido</li>
+        <li>Own_It- Stormzy ft BurnaBoy</li>
+        <li>Shele_gan_gan- Lil Kesh</li>
+        <li>Someone_You_Loved- Lewis Capaldi</li>
+        <li>Stay_High- Juice WRLD</li>
+    </ul>
+</div>
 <div class="title">
-    <h1><span>Vue</span>Music</h1>
+    <h1><span>Vue</span>Music<span><button class="action-btn"><i class="fas fa-music fa-2x"></i></button></span></h1>
      <p>Music for the soul...</p>
 </div>
 
@@ -64,7 +79,7 @@ export default {
                  {
                 title:"Own It",
                 song:require("../assets/music/Own-It.mp3"),
-                artist:"Stormzy",
+                artist:"Stormzy ft BurnaBoy",
                 cover:require("../assets/img/own-it.jpg")
                 },
                  {
@@ -76,7 +91,7 @@ export default {
                  {
                 title:"Someone You Loved",
                 song:require("../assets/music/Someone_You_Loved.mp3"),
-                artist:"Lewis",
+                artist:"Lewis Capaldi",
                 cover:require("../assets/img/someone.jpg")
                 },
                  {
@@ -88,6 +103,7 @@ export default {
                 ],
 
                 play:false,
+                show:false,
                 title: '',
                 song:'',
                 artist:'',
@@ -168,6 +184,16 @@ export default {
            const duration= audio.duration;
 
           audio.currentTime = (clickX/width)*duration
+       },
+       showSong(){
+           const nav = document.querySelector('.nav')
+           this.show=!this.show;
+           if(this.show){
+             nav.style.opacity=0;
+           }
+           else{
+               nav.style.opacity=1
+           }
        }
     
     },
@@ -189,6 +215,7 @@ body{
     display: flex;
     justify-content: center;
     align-items: center;
+    position:relative;
 
 }
 .title{
@@ -289,6 +316,44 @@ body{
 .action:hover{
     background: white;
 }
+.menu{
+   position:fixed;
+   left:0;
+   top:20;
+   z-index: 3;
+}
+.nav{
+   position:absolute;
+   left:0;
+   top:0;
+   padding:30px;
+   background: rgba(0,0,0,0.2);
+   height: 80vh;
+   z-index: 2;
+   border-radius: 5px;
+   transition:opacity 0.5s linear;
+   opacity: 0;
+}
+.nav ul{
+    list-style-type: none;
+    text-align: left;
+    padding:0;
+    margin:0;
+    z-index: 2;
+}
+.nav ul li{
+    color:white;
+    font-size:22px;
+    margin:20px 0;
+    font-weight: bold;
+    transition: color 0.5s linear;
+}
+.nav ul li:hover{
+    color:#6DF3DA;
+}
+.nav ul li.playing{
+     color:#6DF3DA;
+}
 
 /* ANIMATIONS */
 @keyframes breathe{
@@ -349,6 +414,9 @@ body{
 
 /* MEDIA QUERIES */
 @media (max-width:500px) {
+    .nav{
+   background: rgba(0,0,0,0.5);
+}
     .title h1{
         font-size:35px;
     }
