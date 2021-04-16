@@ -130,6 +130,8 @@ export default {
            }
        },
        playSong(){
+            const container = document.querySelector('.music-container')
+            container.classList.add('play')
             const audio = document.getElementById('audio');
             audio.play()
             audio.autoplay=true;
@@ -143,7 +145,7 @@ export default {
             const play= document.querySelector('#play')
             play.querySelector('i.fas').classList.add('fa-play')
             play.querySelector('i.fas').classList.remove('fa-pause')
-
+            
        },
        loadSong(song){
            this.title=song.title;
@@ -151,7 +153,7 @@ export default {
            this.artist=song.artist;
            this.cover=song.cover;
        },
-       playList(num){
+       playList(e,num){
            this.index=num;
            this.start()
            this.playSong()
@@ -362,7 +364,7 @@ body{
 .nav ul li:hover{
     color:#6DF3DA;
 }
-.nav ul li.playing{
+.nav.playing ul li{
      color:#6DF3DA;
 }
 
