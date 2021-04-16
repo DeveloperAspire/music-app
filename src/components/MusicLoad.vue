@@ -39,6 +39,10 @@
     </div>
 
 </div>
+
+<footer>
+    <p>Made with ❤️ by <span><a href="https://twitter.com/DeveloperAspire">Franklin Okolie</a></span> </p>
+</footer>
 </template>
 
 <script>
@@ -224,7 +228,7 @@ export default {
     margin:0;
 }
 body{
-    height: 80vh;
+    height: 90vh;
     display: flex;
     justify-content: center;
     align-items: center;
@@ -366,6 +370,18 @@ body{
 }
 .nav.playing ul li{
      color:#6DF3DA;
+}
+footer{
+    color:white;
+      width:300px;
+    max-width:400px;
+    margin-top:10px;
+    font-weight: bold;
+}
+footer span a{
+    color:#6DF3DA;
+    text-decoration: none;
+    margin-left:10px;
 }
 
 /* ANIMATIONS */
