@@ -3,15 +3,15 @@
 
 <div class="nav">
     <ul>
-        <li>AG_BABY- Adekunle Gold ft BlackMan</li>
-        <li>Dami_Duro- Davido</li>
-        <li>Holy- Justin Bieber ft Chance</li>
-        <li>I'm_The_One- DJ Khaled</li>
-        <li>Jowo- Davido</li>
-        <li>Own_It- Stormzy ft BurnaBoy</li>
-        <li>Shele_gan_gan- Lil Kesh</li>
-        <li>Someone_You_Loved- Lewis Capaldi</li>
-        <li>Stay_High- Juice WRLD</li>
+        <li @click="playList(0)">AG_BABY- Adekunle Gold ft BlackMan</li>
+        <li @click="playList(1)">Dami_Duro- Davido</li>
+        <li @click="playList(2)">Holy- Justin Bieber ft Chance</li>
+        <li @click="playList(3)">I'm_The_One- DJ Khaled</li>
+        <li @click="playList(4)">Jowo- Davido</li>
+        <li @click="playList(5)">Own_It- Stormzy ft BurnaBoy</li>
+        <li @click="playList(6)">Shele_gan_gan- Lil Kesh</li>
+        <li @click="playList(7)">Someone_You_Loved- Lewis Capaldi</li>
+        <li @click="playList(8)">Stay_High- Juice WRLD</li>
     </ul>
 </div>
 <div class="title">
@@ -150,6 +150,17 @@ export default {
            this.song=song.song;
            this.artist=song.artist;
            this.cover=song.cover;
+       },
+       playList(num){
+           this.index=num;
+           this.start()
+           this.playSong()
+            const nav = document.querySelector('.nav')
+            setTimeout(()=> {
+                nav.style.opacity=0;
+
+            },1000)
+
        },
        nextSong(){
            this.index++
