@@ -19,7 +19,7 @@
      <p>Music for the soul...</p>
 </div>
 
-<div class="music-container" :class="{play:play}">
+<div class="music-container" :class="{play:playing}">
     <div>
         <img :src="cover" alt="" class="cover">
     </div>
@@ -106,7 +106,7 @@ export default {
                 },
                 ],
 
-                play:false,
+                playing:false,
                 show:false,
                 title: '',
                 song:'',
@@ -123,15 +123,16 @@ export default {
            this.loadSong(musicList[currentSong])
         },
        playToggle(){
-          this.play=!this.play
+          this.playing=!this.playing
          
-           if(this.play == true){
+           if(this.playing == true){
                this.playSong()
            }else{
                this.pauseSong()
            }
        },
        playSong(){
+           this.playing=true;
             const audio = document.getElementById('audio');
             audio.play()
             audio.autoplay=true;
@@ -165,7 +166,7 @@ export default {
 
        },
        nextSong(){
-           this.play=true
+           this.playing=true
            this.index++
            const music = this.Music
 
@@ -177,7 +178,7 @@ export default {
 
        },
        prevSong(){
-        this.play=true
+        this.playing=true
         this.index--
         const music = this.Music
           if(this.index < 0){
