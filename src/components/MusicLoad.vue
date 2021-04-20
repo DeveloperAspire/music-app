@@ -1,7 +1,7 @@
 <template>
 <button @click="showSong" class="action-btn menu"><i class="fas fa-music fa-lg"></i><i class="fas fa-bars fa-lg"></i></button>
 
-<div class="nav">
+<div class="nav" ref="nav">
     <ul>
         <li @click="playList(0)">AG_BABY- Adekunle Gold ft BlackMan</li>
         <li @click="playList(1)">Dami_Duro- Davido</li>
@@ -28,13 +28,13 @@
         <p class="music-singer">{{artist}}</p>
     </div>
     <div @click="setProgress" class="progress-container">
-        <div class="progress">
+        <div class="progress" ref="progress">
         </div>
     </div>
-    <audio @timeupdate="updateProgress" @ended="nextSong" :src="song" id="audio" type="audio/mp3"></audio>
+    <audio @timeupdate="updateProgress" @ended="nextSong" :src="song" ref="audio"></audio>
     <div class="controls">
         <button @click="prevSong" class="action-btn"><i class="fas fa-backward"></i></button>
-        <button id="play" @click="playToggle" class="action-btn action"><i class="fas fa-play"></i></button>
+        <button  @click="playToggle" class="action-btn action"><i ref="play" class="fas fa-play"></i></button>
         <button @click="nextSong" class="action-btn"><i class="fas fa-forward"></i></button>
     </div>
 
@@ -133,19 +133,18 @@ export default {
        },
        playSong(){
            this.playing=true;
-            const audio = document.getElementById('audio');
-            audio.play()
-            audio.autoplay=true;
-            const play= document.querySelector('#play')
-            play.querySelector('i.fas').classList.remove('fa-play')
-            play.querySelector('i.fas').classList.add('fa-pause')
+            this.$refs.audio.play();
+            this.$refs.audio.autoplay=true;
+
+            const play= this.$refs.play
+            play.classList.remove('fa-play')
+            play.classList.add('fa-pause')
        },
        pauseSong(){
-            const audio = document.getElementById('audio');
-            audio.pause()
-            const play= document.querySelector('#play')
-            play.querySelector('i.fas').classList.add('fa-play')
-            play.querySelector('i.fas').classList.remove('fa-pause')
+             this.$refs.audio.pause();
+             const play= this.$refs.play
+            play.classList.add('fa-play')
+            play.classList.remove('fa-pause')
             
        },
        loadSong(song){
@@ -158,7 +157,7 @@ export default {
            this.index=num;
            this.start()
            this.playSong()
-            const nav = document.querySelector('.nav')
+           const nav = this.$refs.nav
             setTimeout(()=> {
                 nav.style.display="none";
 
@@ -187,14 +186,14 @@ export default {
         this.start()
        },
        updateProgress(e){
-           const progress = document.querySelector('.progress')
+           const progress = this.$refs.progress
            const{duration, currentTime}= e.srcElement
            const progressPercent = (currentTime/duration) * 100
 
           progress.style.width = `${progressPercent}%`
        },
        setProgress(e){
-            const audio = document.getElementById('audio');
+           const audio = this.$refs.audio
            const width = 300
           const clickX = e.offsetX;
            const duration= audio.duration;
@@ -202,7 +201,7 @@ export default {
           audio.currentTime = (clickX/width)*duration
        },
        showSong(){
-           const nav = document.querySelector('.nav')
+           const nav = this.$refs.nav
            this.show=!this.show;
            if(this.show){
              nav.style.display="none";
