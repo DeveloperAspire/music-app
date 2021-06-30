@@ -1,4 +1,5 @@
 # music-app
+![](/assets/img/music-app.png)
 
 Vue Music is a minimalistic music player application built with Vue and CSS, the application is capableof playing songs, pausing songs, skipping to the next and previous ones, fast forwarding to anytime in the music streams.
 
